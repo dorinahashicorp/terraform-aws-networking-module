@@ -1,7 +1,3 @@
-output "internet_gateway_id" {
-  value = aws_internet_gateway.gateway.id
-}
-
 output "public_route_table_id" {
   description = "The ID of the Public Route Table"
   value       = aws_route_table.public.id

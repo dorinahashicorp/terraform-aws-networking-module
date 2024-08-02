@@ -1,33 +1,14 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-  required_version =  ">= 1.5.0"
-}
-
-# Create the internet gateway. Provides a path for network traffic between a VPC and the public internet.
-resource "aws_internet_gateway" "gateway" {
-  vpc_id = var.vpc_id
-
-  tags = {
-    Name = var.gateway_name
-  }
-}
-
-# Create the public route table. Provides a rule that determine where public network traffic is directed.
+# Create the public route table. Provides a rule that determines where public network traffic is directed.
 resource "aws_route_table" "public" {
   vpc_id = var.vpc_id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.gateway.id
+    gateway_id = var.gateway_id
   }
 
   tags = {
-    Name = "Public Route Table"
+    Name = var.public_route_name
   }
 }
 
@@ -44,7 +25,7 @@ resource "aws_route_table" "private" {
   # No explicit routes needed, as default VPC routing handles internal traffic and does not allow outbound communication.
 
   tags = {
-    Name = "Private Route Table"
+    Name = var.private_route_name
   }
 }
 
