@@ -4,6 +4,12 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "cidr_block" {
+  description = "The CIDR block for the route table"
+  type = string 
+  default = "0.0.0.0/0"
+}
+
 variable "public_subnet_id" {
   description = "The Public Subnet ID"
   type        = string
