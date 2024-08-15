@@ -1,3 +1,9 @@
+variable "aws_region" {
+  description = "The AWS region"
+  type        = string
+  default     = "us-east-1"
+}
+
 # The below three variables are being imported from the terraform-aws-vpc-module
 variable "vpc_id" {
   description = "The ID of the VPC the Internet Gateway will be associated with."
